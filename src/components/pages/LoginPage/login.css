@@ -1,0 +1,37 @@
+.Login-title{text-align: center; border-bottom: 1px solid #e9e9e9; border-radius: 5px; color: #ffffff; background-color: #0085d5; font-family:'Times New Roman';font-size: 5rem; margin: 0; margin-bottom:.25rem;padding: 0.5rem;}
+.Login-subtitle{text-align: center; color: #32374b; font-size: 1.5rem;margin: 5px;}
+
+.Login-Form{
+    margin: auto;
+    padding: 5rem;
+    width: 35rem;
+    background-color: #d9d9d9;
+    border-radius: 4px;
+    box-shadow: 1px 0px 3px 0px #cbcbcb;
+    display: flex;
+    flex-direction: column;
+}
+.Login-Group{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+.Login-Field{
+    border: 1px solid #006699;
+    border-radius: 3px;
+    color: #32374b;
+    font-size: 1.2rem;
+    padding: 2rem 1rem;
+    transition: all .2s linear;  
+}
+
+.Login-Field:focus{box-shadow: 0 0 7px rgba(13, 21, 48, 0.9); border-color: #006699; outline: none;}
+
+.Login-Btn{background: #32374b; border: none; border-radius: 3px; color: #dcdcdc; margin-top: 1rem; padding: .5rem; transition: background .2s linear;}
+.Login-Btn:focus{outline: none;}
+.Login-Btn:hover{background: #006699;cursor: pointer;}
+
+.Login-Error{color: #f14545;}
+.Login-Link{color: white; padding: 0 1rem; text-decoration: none;}

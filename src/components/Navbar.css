@@ -1,0 +1,31 @@
+.App-Menu{background-color: #111;}
+
+.App-Menu-List{list-style-type: none; margin: 0; padding: 0; overflow: hidden;background-color: #333;}
+
+.App-Menu-Item{float: left; display: block;text-align: center;padding: 16px; text-decoration: none;}
+
+.App-Menu-Item:hover:not(.App-Menu){background-color: #006699; cursor: pointer;}
+
+.App-Menu-Link{color: white; padding: 0 1rem; text-decoration: none;}
+
+input[type=search]{float: right !important; 
+    width: 150px; 
+    box-sizing: border-box; 
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.4s ease-in-out;
+}
+
+input[type='search']:focus{width: 100%;}
+
+.Btn-logout {background: #dcdcdc;
+    border: none; 
+    border-radius: 3px; 
+    color: #32374b;
+    margin-top: 1rem; 
+    padding: 1rem; 
+    transition: background .2s linear;}
+
+.Btn-logout:focus{outline: none;}
+.Btn-logout:hover{background: #006699; cursor: pointer;}
