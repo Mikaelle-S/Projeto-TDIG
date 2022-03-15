@@ -1,65 +1,136 @@
-import React from 'react'
+import React from "react";
 
-import { ErrorMessage, Formik, Form, Field } from 'formik'
-import * as yup from 'yup'
+import { ErrorMessage, Formik, Form, Field } from "formik";
+import * as yup from "yup";
 
-import { useLocation, useNavigate } from 'react-router-dom'
-import { authContext } from '../../AuthProvider'
+import { useLocation, useNavigate } from "react-router-dom";
+import { authContext } from "../../AuthProvider";
+import authService from "../../../services/auth.service";
 
-import '../LoginPage/login.css'
+import "../LoginPage/login.css";
 
 const registerSchema = yup.object().shape({
-    email: yup.string().email("Inválido").required("Obrigatório"),
-    senha: yup.string().min(8).required("Obrigatório"),
+  function: yup.string().required("Obrigatório"),
+  password: yup.string().min(8).required("Obrigatório"),
+  registration: yup.number(),
+  role: yup.string().required("Obrigatório"),
+  username: yup.string().required("Obrigatório"),
 });
 
 const RegisterUser = () => {
-    const { register } = React.useContext(authContext);
-    let navigate = useNavigate();
-    let location = useLocation();
+  /*const { register } = React.useContext(authContext);
+  let navigate = useNavigate();
+  let location = useLocation();
 
-    let from = location.state?.from || "/login";
+  let from = location.state?.from || "/login";*/
 
-    const handleSubmitting = (values, { setSubmitting, setStatus }) => {
-        setStatus({ isValidating: true });
-        register().then(navigate(from, { replace: true }))
-        setTimeout(() => {
-        console.info(JSON.stringify(values, null, 2));
-        setSubmitting(false); 
-        setStatus({ isValidating: false });
-        }, 400);
-    };
-    
-    return (
+  const handleSubmitting = (values, { setSubmitting, setStatus }) => {
+    setStatus({ isValidating: true });
+    /*register().then(navigate(from, { replace: true }));*/
+    setTimeout(() => {
+      authService.register(JSON.stringify(values, null, 2));
+      console.info(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+      setStatus({ isValidating: false });
+    }, 400);
+  };
 
-        <Formik validationSchema={registerSchema} initialValues={{ email: '', password: ''}} onSubmit={handleSubmitting}>
-            {({ handleChange, handleBlur, handleSubmit, isSubmitting,
-                }) => (                 
-                    <Form className="Login-Form" onSubmit={handleSubmit}>
-                        <h1 className='Login-title'>Cadastro</h1>
-                        <h2 className='Login-subtitle'>Preencha os campos para criar um novo usuario</h2>
-                        <div className="Login-Group">
-                            <Field name="Nome" type="text" placeholder="Nome" onBlur={handleBlur} onChange={handleChange} className="Login-Field"/>
-                            <ErrorMessage component="span" name="Nome" className="Login-Error"/>
-                        </div>
-                        <div className="Login-Group">
-                            <Field name="Sobrenome" type="text" placeholder="Sobrenome" onBlur={handleBlur} onChange={handleChange} className="Login-Field"/>
-                            <ErrorMessage component="span" name="Sobrenome" className="Login-Error"/>
-                        </div>
-                        <div className="Login-Group">
-                            <Field name="email" type="text" placeholder="Email" onBlur={handleBlur} onChange={handleChange} className="Login-Field"/>
-                            <ErrorMessage component="span" name="email" className="Login-Error"/>
-                        </div>
-                        <div className="Login-Group">
-                            <Field name="senha" type="password" placeholder="Senha" onBlur={handleBlur} onChange={handleChange} className="Login-Field"/>
-                            <ErrorMessage component="span" name="senha" className="Login-Error"/>
-                        </div>
-                        <button className="Login-Btn" type="submit">Cadastrar</button>
-                    </Form>
-                )} 
+  return (
+    <Formik
+      validationSchema={registerSchema}
+      initialValues={{
+        function: "",
+        password: "",
+        registration: 1,
+        role: "",
+        username: "",
+      }}
+      onSubmit={handleSubmitting}
+    >
+      {({ handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+        <Form className="Login-Form" onSubmit={handleSubmit}>
+          <h1 className="Login-title">Cadastro</h1>
+          <h2 className="Login-subtitle">
+            Preencha os campos para criar um novo usuario
+          </h2>
+          <div className="Login-Group">
+            <Field
+              name="function"
+              as="select"
+              type="text"
+              placeholder="Função"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className="Login-Field"
+            >
+              <option value="TRAINEE">TRAINEE</option>
+              <option value="JUNIOR">JUNIOR</option>
+              <option value="SENIOR">SENIOR</option>
+              <option value="MASTER">MASTER</option>
+              <option value="COORDINATOR">COORDENADOR</option>
+            </Field>
+            <ErrorMessage
+              component="span"
+              name="function"
+              className="Login-Error"
+            />
+          </div>
+          <div className="Login-Group">
+            <Field
+              name="password"
+              type="password"
+              placeholder="Senha"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className="Login-Field"
+            />
+            <ErrorMessage
+              component="span"
+              name="password"
+              className="Login-Error"
+            />
+          </div>
+          <div className="Login-Group">
+            <Field
+              name="role"
+              type="text"
+              as="select"
+              placeholder="Papel"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className="Login-Field"
+            >
+              <option value="TEACHER">PROFESSOR</option>
+              <option value="ALUMN">ALUNO</option>
+            </Field>
+            <ErrorMessage
+              component="span"
+              name="role"
+              className="Login-Error"
+            />
+          </div>
+          <div className="Login-Group">
+            <Field
+              name="username"
+              type="text"
+              placeholder="Username"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className="Login-Field"
+            />
+            <ErrorMessage
+              component="span"
+              name="username"
+              className="Login-Error"
+            />
+          </div>
+          <button className="Login-Btn" type="submit">
+            Cadastrar
+          </button>
+        </Form>
+      )}
     </Formik>
-        
-    )
-}
+  );
+};
 
 export default RegisterUser;
