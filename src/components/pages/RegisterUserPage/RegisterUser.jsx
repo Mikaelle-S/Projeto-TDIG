@@ -18,17 +18,26 @@ const registerSchema = yup.object().shape({
 });
 
 const RegisterUser = () => {
-  /*const { register } = React.useContext(authContext);
+  const { register } = React.useContext(authContext);
   let navigate = useNavigate();
   let location = useLocation();
 
-  let from = location.state?.from || "/login";*/
+  let from = location.state?.from || "/login";
 
   const handleSubmitting = (values, { setSubmitting, setStatus }) => {
     setStatus({ isValidating: true });
-    /*register().then(navigate(from, { replace: true }));*/
     setTimeout(() => {
-      authService.register(JSON.stringify(values, null, 2));
+      authService
+        .register(
+          values.function,
+          values.password,
+          values.registration,
+          values.role,
+          values.username
+        )
+        .then(() => {
+          register().then(navigate(from, { replace: true }));
+        });
       console.info(JSON.stringify(values, null, 2));
       setSubmitting(false);
       setStatus({ isValidating: false });
@@ -41,7 +50,7 @@ const RegisterUser = () => {
       initialValues={{
         function: "",
         password: "",
-        registration: 1,
+        registration: 101,
         role: "",
         username: "",
       }}

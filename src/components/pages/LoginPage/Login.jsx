@@ -22,7 +22,7 @@ const Login = () => {
   const handleSubmitting = (values, { setSubmitting, setStatus }) => {
     setStatus({ isValidating: true });
     setTimeout(() => {
-      authService.login(JSON.stringify(values, null, 2));
+      authService.login(values.password, values.username);
       console.info(JSON.stringify(values, null, 2));
       setSubmitting(false);
       setStatus({ isValidating: false });
