@@ -10,7 +10,11 @@ class UserService {
   }
 
   getAdminBoard() {
-    return axios.get(API_URL + "/api/v1/projects", { headers: authHeader() });
+    axios
+      .get(API_URL + "/api/v1/projects", { headers: authHeader() })
+      .then((response) => {
+        return response;
+      });
   }
 }
 export default new UserService();

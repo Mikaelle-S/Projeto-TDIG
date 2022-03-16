@@ -7,6 +7,7 @@ import * as yup from "yup";
 import "./login.css";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import authHeader from "../../../services/auth-header";
 
 const validations = yup.object().shape({
   password: yup.string().min(8).required("Obrigatório"),
@@ -17,12 +18,17 @@ const Login = () => {
   let navigate = useNavigate();
   let location = useLocation();
 
-  let from = location.state?.from || "/";
+  let from = location.state?.from || "/professor-view";
 
   const handleSubmitting = (values, { setSubmitting, setStatus }) => {
     setStatus({ isValidating: true });
     setTimeout(() => {
-      authService.login(values.password, values.username);
+      authService.login(values.password, values.username).then(() => {
+        if (authHeader() !== null) {
+          console.log(authHeader());
+          navigate(from, { replace: true });
+        }
+      });
       console.info(JSON.stringify(values, null, 2));
       setSubmitting(false);
       setStatus({ isValidating: false });

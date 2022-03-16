@@ -36,7 +36,7 @@ const RegisterUser = () => {
           values.username
         )
         .then(() => {
-          register().then(navigate(from, { replace: true }));
+          navigate(from, { replace: true });
         });
       console.info(JSON.stringify(values, null, 2));
       setSubmitting(false);
