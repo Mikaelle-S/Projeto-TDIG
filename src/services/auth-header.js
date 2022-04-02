@@ -1,8 +1,10 @@
 export default function authHeader() {
-  const token = window.localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+
   if (token) {
+    console.log(token);
     return { Authorization: token };
   } else {
-    return null;
+    return {};
   }
 }

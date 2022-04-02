@@ -24,11 +24,10 @@ const Login = () => {
     setStatus({ isValidating: true });
     setTimeout(() => {
       authService.login(values.password, values.username).then(() => {
-        if (authHeader() !== null) {
-          console.log(authHeader());
-          navigate(from, { replace: true });
-        }
+        navigate(from, { replace: true });
+        window.location.reload();
       });
+
       console.info(JSON.stringify(values, null, 2));
       setSubmitting(false);
       setStatus({ isValidating: false });

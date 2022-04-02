@@ -1,5 +1,7 @@
+import authHeader from "./auth-header";
 import axios from "axios";
-const API_URL = "https://fast-badlands-00990.herokuapp.com";
+const API_URL = "https://immense-sands-97611.herokuapp.com";
+
 class AuthService {
   login(password, username) {
     return axios
@@ -8,13 +10,11 @@ class AuthService {
         username: username,
       })
       .then((response) => {
-        console.log(response.headers);
-        if (response.headers.get("Authorization")) {
-          window.localStorage.setItem(
-            "token",
-            response.headers.get("Authorization")
-          );
+        console.log(response.data.token);
+        if (response) {
+          localStorage.setItem("token", response.data.token);
         }
+
         return response.data;
       });
   }
@@ -30,6 +30,34 @@ class AuthService {
       username: username,
     });
   }
+
+  createProject(name, description) {
+    return axios.post(
+      API_URL + "/api/v1/projects",
+      {
+        description: description,
+        name: name,
+      },
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
+  linkUser(funcao, projectId, username) {
+    return axios.post(
+      API_URL + "/api/v1/projects/link",
+      {
+        function: funcao,
+        projectId: projectId,
+        username: username,
+      },
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
   getCurrentUser() {
     return JSON.parse(window.localStorage.getItem("user"));
   }

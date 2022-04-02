@@ -1,6 +1,6 @@
 import axios from "axios";
 import authHeader from "./auth-header";
-const API_URL = "https://fast-badlands-00990.herokuapp.com";
+const API_URL = "https://immense-sands-97611.herokuapp.com";
 class UserService {
   getPublicContent() {
     return axios.get(API_URL);
