@@ -8,6 +8,8 @@ import * as yup from "yup";
 
 import authHeader from "../../../services/auth-header";
 
+import "./Professor.css";
+
 const createProjectSchema = yup.object().shape({
   name: yup.string().required("Obrigatório"),
   description: yup.string().required("Obrigatório"),
@@ -62,18 +64,18 @@ class Professor extends Component {
     return (
       <>
         <Navbar />
-        <h1>Projetos Cadastrados</h1>
-        <div>
+        <h1 className="Projeto-title">Projetos Cadastrados</h1>
+        <div className="Projeto-List">
           {this.state.lists.map((list) => {
             return (
               <div key={list.id}>
-                <h3>Nome do projeto: {JSON.stringify(list.name)}</h3>
-                <h3>Descrição: {JSON.stringify(list.description)}</h3>
-                <h3>
+                <h3 className="Projeto-subtitle3">Nome do projeto: {JSON.stringify(list.name)}</h3>
+                <h3 className="Projeto-subtitle3">Descrição: {JSON.stringify(list.description)}</h3>
+                <h3 className="Projeto-subtitle3">
                   Professor responsável:{" "}
                   {JSON.stringify(list.users["0"].username)}
                 </h3>
-                <h3>
+                <h3 className="Projeto-subtitle3">
                   Cargo do professor: {JSON.stringify(list.users["0"].function)}
                 </h3>
                 <br />
@@ -90,42 +92,42 @@ class Professor extends Component {
           onSubmit={this.handleSubmitting}
         >
           {({ handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-            <Form className="Login-Form" onSubmit={handleSubmit}>
-              <h1 className="Login-title">Cadastro de Projeto</h1>
-              <h2 className="Login-subtitle">
+            <Form className="Projeto-Cadastro" onSubmit={handleSubmit}>
+              <h1 className="Projeto-title">Cadastro de Projeto</h1>
+              <h2 className="Projeto-subtitle">
                 Preencha os campos para criar um novo projeto
               </h2>
-              <div className="Login-Group">
+              <div className="Projeto-Group">
                 <Field
                   name="name"
                   type="text"
                   placeholder="Nome do Projeto"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  className="Login-Field"
+                  className="Projeto-Field"
                 />
                 <ErrorMessage
                   component="span"
                   name="name"
-                  className="Login-Error"
+                  className="Projeto-Error"
                 />
               </div>
-              <div className="Login-Group">
+              <div className="Projeto-Description">
                 <Field
                   name="description"
                   type="text"
                   placeholder="Descrição do projeto"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  className="Login-Field"
+                  className="Projeto-Field"
                 />
                 <ErrorMessage
                   component="span"
                   name="description"
-                  className="Login-Error"
+                  className="Projeto-Error"
                 />
               </div>
-              <button className="Login-Btn" type="submit">
+              <button className="Projeto-Btn" type="submit">
                 Cadastrar Projeto
               </button>
             </Form>
@@ -141,12 +143,12 @@ class Professor extends Component {
           onSubmit={this.handleSubmitting2}
         >
           {({ handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-            <Form className="Login-Form" onSubmit={handleSubmit}>
-              <h1 className="Login-title">Linkar Aluno</h1>
-              <h2 className="Login-subtitle">
+            <Form className="Projeto-Linkar" onSubmit={handleSubmit}>
+              <h1 className="Projeto-title">Linkar Aluno</h1>
+              <h2 className="Projeto-subtitle">
                 Preencha os campos para criar linkar um aluno a um projeto
               </h2>
-              <div className="Login-Group">
+              <div className="Projeto-Group">
                 <Field
                   name="function"
                   as="select"
@@ -154,7 +156,7 @@ class Professor extends Component {
                   placeholder="Função"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  className="Login-Field"
+                  className="Projeto-Field"
                 >
                   <option value="TRAINEE">TRAINEE</option>
                   <option value="JUNIOR">JUNIOR</option>
@@ -165,40 +167,40 @@ class Professor extends Component {
                 <ErrorMessage
                   component="span"
                   name="function"
-                  className="Login-Error"
+                  className="Projeto-Error"
                 />
               </div>
-              <div className="Login-Group">
+              <div className="Projeto-Group">
                 <Field
                   name="projectId"
                   type="number"
                   placeholder="ID do projeto"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  className="Login-Field"
+                  className="Projeto-Field"
                 />
                 <ErrorMessage
                   component="span"
                   name="projectId"
-                  className="Login-Error"
+                  className="Projeto-Error"
                 />
               </div>
-              <div className="Login-Group">
+              <div className="Projeto-Group">
                 <Field
                   name="username"
                   type="text"
                   placeholder="username"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  className="Login-Field"
+                  className="Projeto-Field"
                 />
                 <ErrorMessage
                   component="span"
                   name="username"
-                  className="Login-Error"
+                  className="Projeto-Error"
                 />
               </div>
-              <button className="Login-Btn" type="submit">
+              <button className="Projeto-Btn" type="submit">
                 Linkar Aluno
               </button>
             </Form>
